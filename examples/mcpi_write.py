@@ -22,6 +22,7 @@
 import binascii
 import sys
 
+import Adafruit_GPIO.SPI as SPI
 import Adafruit_PN532 as PN532
 
 import mcpi_data
@@ -33,6 +34,10 @@ MOSI = 23
 MISO = 24
 SCLK = 25
 
+# Configuration for a Raspberry Pi hardware SPI:
+#SPI_PORT   = 0
+#SPI_DEVICE = 0
+
 # Configure the key to use for writing to the MiFare card.  You probably don't
 # need to change this from the default below unless you know your card has a
 # different key associated with it.
@@ -41,6 +46,8 @@ CARD_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 
 # Create and initialize an instance of the PN532 class.
 pn532 = PN532.PN532(cs=CS, sclk=SCLK, mosi=MOSI, miso=MISO)
+#pn532 = PN532.PN532(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+
 pn532.begin()
 pn532.SAM_configuration()
 
