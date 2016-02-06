@@ -22,17 +22,22 @@
 import binascii
 import sys
 
+import Adafruit_GPIO.SPI as SPI
 import Adafruit_PN532 as PN532
 
 
 # Setup how the PN532 is connected to the Raspbery Pi/BeagleBone Black.
 # It is recommended to use a software SPI connection with 4 digital GPIO pins.
 
-# Configuration for a Raspberry Pi:
+# Configuration for a Raspberry Pi software SPI:
 CS   = 18
 MOSI = 23
 MISO = 24
 SCLK = 25
+
+# Configuration for a Raspberry Pi hardware SPI:
+#SPI_PORT   = 0
+#SPI_DEVICE = 0
 
 # Configuration for a BeagleBone Black:
 # CS   = 'P8_7'
@@ -42,6 +47,7 @@ SCLK = 25
 
 # Create an instance of the PN532 class.
 pn532 = PN532.PN532(cs=CS, sclk=SCLK, mosi=MOSI, miso=MISO)
+#pn532 = PN532.PN532(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # Call begin to initialize communication with the PN532.  Must be done before
 # any other calls to the PN532!
